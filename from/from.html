@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+</head>
+<body>
+	<form action="">
+		<label for="">用户名:</label>
+		<input type="text" placeholder="请输入用户名" value="" name="username"><br>
+		<label for="">密&nbsp;码:</label>
+		<input type="password" placeholder="请输入密码" value="" name="password"><br>
+		<label for="">爱 好:</label>
+		 <label for="qin">弹琴</label>
+		<input type="checkbox" name="qin[]" id="qin" value="qin">
+		 <label for="hua">画画</label>
+		<input type="checkbox" name="qin[]" id="hua" value="hua"><br>
+		性 别:
+		<label for="man">男</label>
+		<input type="radio" value="1" name="sex" id="man">
+		<label for="woman">女</label>
+		<input type="radio" value="0" name="sex" id="woman"><br>
+		<button id="btn">提交</button>
+	</form>
+	<script type="text/javascript">
+		$(function(){
+			$("#btn").click(function(e){
+				// e.preventDefault();
+
+				var username=$("input[name='username']").val();
+				var password=$("input[name='password']").val();
+				var like=[];
+				$("input:checkbox[name='qin[]']:checked").each(function(){
+					like.push($(this).val());
+				});
+				var sex=$("input:radio:checked").val();
+
+				var data = {username:username,
+							pass:password,
+							like:like,
+							sex:sex}; 
+				$.ajax({
+					type:"POST",
+					url:"data.php",
+					data:data,
+					success:function(data){
+						console.log(data);
+					}
+				})
+			return false;
+
+			// url:data.php
+			// method:get/postd
+			// type:
+			// 	{
+			// 		username:name,
+			// 		pass:pass,
+			// 		like:[
+
+			// 		],
+
+			// 	}
+
+			})
+		})
+	</script>
+</body>
+</html>
